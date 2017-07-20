@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.15.3",
     "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-date-picker": "^5.3.28",
@@ -14,7 +15,8 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "start.static_server": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
