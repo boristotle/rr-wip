@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD:src/components/RecordsComponent.js
-import * as records from '../mock-data/mock-data.json';
-=======
->>>>>>> 8912904c9f0cc2bbeb96439c7114980ee6f25d78:src/components/RecordsComponent.js
 import ProjectOwnerComponent from './ProjectOwnerComponent';
 import BudgetComponent from './BudgetComponent';
 import StatusComponent from './StatusComponent';
@@ -101,13 +97,7 @@ export default class RecordsComponent extends Component {
       return false;
     })
 
-<<<<<<< HEAD:src/components/RecordsComponent.js
-    this.setState({filteredRecords: filteredRecords}, function(){
-      // console.log('this.state', this.state.filteredRecords);
-    });
-=======
    this.props.updateFilteredRecords(filteredRecords);
->>>>>>> 8912904c9f0cc2bbeb96439c7114980ee6f25d78:src/components/RecordsComponent.js
 
   };
 
@@ -118,16 +108,12 @@ export default class RecordsComponent extends Component {
   };
 
   render() {
-<<<<<<< HEAD:src/components/RecordsComponent.js
     let mappedRecords;
-    if (this.state.filteredRecords.length >= 0) {
-      mappedRecords = this.state.filteredRecords.map((record, index) =>  
-=======
 
+    if (this.props.filteredRecords.length >= 0) {
     console.log('this.props', this.props);
     
-    let mappedRecords = this.props.filteredRecords.map((record, index) =>  
->>>>>>> 8912904c9f0cc2bbeb96439c7114980ee6f25d78:src/components/RecordsComponent.js
+    mappedRecords = this.props.filteredRecords.map((record, index) =>  
       <tr key={index}>
         <td> <a href="#">{record.title}</a></td>
         <td> {record.division} </td>
@@ -148,31 +134,6 @@ export default class RecordsComponent extends Component {
       <div className='title'><h1>Project Dashboard</h1></div>
       <table>
         <thead>
-<<<<<<< HEAD:src/components/RecordsComponent.js
-        <TableHeaderComponent />
-            <tr>
-              <th>
-                <input onKeyDown={this.detectBackspace.bind(this, 'title')} onChange={this.filterRecords.bind(this, 'title')} type="text" placeholder="filter title"/>
-              </th>
-              <th>
-                <input onKeyDown={this.detectBackspace.bind(this, 'division')} onChange={this.filterRecords.bind(this, 'division')} type="text" placeholder="filter division"/>
-              </th>
-              <th>
-                <input onKeyDown={this.detectBackspace.bind(this, 'project_owner')} onChange={this.filterRecords.bind(this, 'project_owner')} type="text" placeholder="filter project owner"/>
-              </th>
-              <th>
-                <input onKeyDown={this.detectBackspace.bind(this, 'budget')} onChange={this.filterRecords.bind(this, 'budget')} type="text" placeholder="filter budget"/>
-              </th>
-              <th>
-                <input onKeyDown={this.detectBackspace.bind(this, 'status')} onChange={this.filterRecords.bind(this, 'status')} type="text" placeholder="filter status"/>
-              </th> 
-              <th>
-                <input type="date" onChange={this.filterRecords.bind(this, 'created_start')} placeholder="start date"/> to <input type="date" onChange={this.filterRecords.bind(this, 'created_end')} placeholder="end date"/>
-              </th>
-              <th>
-                <input type="date" onChange={this.filterRecords.bind(this, 'modified_start')} placeholder="start date"/> to <input type="date" onChange={this.filterRecords.bind(this, 'modified_end')} placeholder="end date"/>
-              </th>
-=======
           <TableHeaderComponent />
             <tr>
             <th>
@@ -196,7 +157,6 @@ export default class RecordsComponent extends Component {
             <th>
               <input onKeyDown={this.detectBackspace.bind(this, 'modified_start')} type="date" onChange={this.filterRecords.bind(this, 'modified_start')} placeholder="start date"/> to <input onKeyDown={this.detectBackspace.bind(this, 'modified_end')} type="date" onChange={this.filterRecords.bind(this, 'modified_end')} placeholder="end date"/>
             </th>
->>>>>>> 8912904c9f0cc2bbeb96439c7114980ee6f25d78:src/components/RecordsComponent.js
             </tr>
           </thead>
           <tbody>
