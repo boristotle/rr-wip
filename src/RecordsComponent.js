@@ -6,13 +6,9 @@ import StatusComponent from './StatusComponent';
 
 export default class RecordsComponent extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      records: records,
-      filteredRecords: records,
-    };
-    
+  constructor(props){
+    super(props);
+
     this.searchParams = {
         title: "",
         division: "",
@@ -26,20 +22,20 @@ export default class RecordsComponent extends Component {
   
 
   _updateRecordProjectOwner(project_owner, id){
-    let newStateRecords = [...this.state.records];
+    let newStateRecords = [...this.props.records];
     newStateRecords[id]['project_owner'] = project_owner;
     this.setState({records: newStateRecords});
   };
 
   _updateRecordBudget(budget, id){
-    let newStateRecords = [...this.state.records];
+    let newStateRecords = [...this.props.records];
     newStateRecords[id]['budget'] = budget;
     this.setState({records: newStateRecords});
   };
 
 
   _updateRecordStatus(status, id){
-    let newStateRecords = [...this.state.records];
+    let newStateRecords = [...this.props.records];
     newStateRecords[id]['status'] = status;
     this.setState({records: newStateRecords});
   };
@@ -49,7 +45,7 @@ export default class RecordsComponent extends Component {
 
     let filteredRecords;
     let newTargetValue;
-    let stateRecordClone = [...this.state.records];
+    let propsRecordClone = [...this.props.records];
 
     if (dropLastLetter && event.target.value.length > 0){
       newTargetValue = event.target.value.slice(0, -1).toLowerCase();
@@ -73,8 +69,7 @@ export default class RecordsComponent extends Component {
       this.searchParams = {...this.searchParams, status: newTargetValue};
     }
 
-
-   filteredRecords = stateRecordClone.filter((record) => {
+   filteredRecords = propsRecordClone.filter((record) => {
       if (record.title.toLowerCase().indexOf(this.searchParams.title) >= 0 
         && record.division.toLowerCase().indexOf(this.searchParams.division) >= 0
         && record.project_owner.toLowerCase().indexOf(this.searchParams.project_owner) >= 0
@@ -84,9 +79,7 @@ export default class RecordsComponent extends Component {
       }
     })
 
-    this.setState({filteredRecords: filteredRecords}, function(){
-      console.log('this.state', this.state.filteredRecords);
-    });
+   this.props.updateFilteredRecords(filteredRecords);
 
   };
 
@@ -102,7 +95,7 @@ export default class RecordsComponent extends Component {
 
     console.log('this.props', this.props);
     
-    let mappedRecords = this.state.filteredRecords.map((record, index) =>  
+    let mappedRecords = this.props.filteredRecords.map((record, index) =>  
       <tr key={index}>
         <td> <a href="#">{record.title}</a></td>
         <td> {record.division} </td>

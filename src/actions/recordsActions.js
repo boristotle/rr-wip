@@ -1,6 +1,6 @@
-export function logRecord(record) {
+export function updateFilteredRecords(records) {
   return {
-    type: 'LOG_RECORD',
-    payload: record
+    type: 'UPDATE_FILTERED_RECORDS',
+    payload: records
   }
 }

@@ -1,5 +1,5 @@
 import {createStore} from 'redux';
-import {reducer} from './reducers/recordsReducer';
+import {reducer} from './reducers/RecordsReducer';
 // import * as recordsActions from './actions/recordsActions';
 
 const store = createStore(reducer);
