@@ -4,9 +4,7 @@
   "private": true,
   "dependencies": {
     "express": "^4.15.3",
-    "moment": "^2.18.1",
     "react": "^15.6.1",
-    "react-date-picker": "^5.3.28",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2"
@@ -16,7 +14,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "start.static_server": "react-scripts start",
+    "start.react.scripts": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
