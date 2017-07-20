@@ -13,6 +13,6 @@ const mapDispatchToProps = function(dispatch) {
       dispatch(logRecord({record: 'record1'}));
     },
   }
-}
+} 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
