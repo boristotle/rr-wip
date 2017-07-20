@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import * as records from './mock-data.json';
+import * as records from '../mock-data/mock-data.json';
 import ProjectOwnerComponent from './ProjectOwnerComponent';
 import BudgetComponent from './BudgetComponent';
 import StatusComponent from './StatusComponent';
+import TableHeaderComponent from './TableHeaderComponent';
 
 export default class RecordsComponent extends Component {
 
@@ -18,7 +19,11 @@ export default class RecordsComponent extends Component {
         division: "",
         project_owner: "",
         budget: "",
-        status: ""
+        status: "",
+        createdStart: "01/01/0000",
+        createdEnd: "12/31/3000",
+        modifiedStart: "01/01/0000",
+        modifiedEnd: "12/31/3000"
     };
 
   };
@@ -71,6 +76,18 @@ export default class RecordsComponent extends Component {
     } 
     else if (field === 'status'){
       this.searchParams = {...this.searchParams, status: newTargetValue};
+    } 
+    else if (field === 'created_start') {
+      this.searchParams = {...this.searchParams, createdStart: event.target.value};
+    }
+    else if (field === 'created_end') {
+      this.searchParams = {...this.searchParams, createdEnd: event.target.value};
+    } 
+    else if (field === 'modified_start') {
+      this.searchParams = {...this.searchParams, modifiedStart: event.target.value};
+    } 
+    else if (field === 'modified_end') {
+      this.searchParams = {...this.searchParams, modifiedEnd: event.target.value};
     }
 
 
@@ -79,13 +96,18 @@ export default class RecordsComponent extends Component {
         && record.division.toLowerCase().indexOf(this.searchParams.division) >= 0
         && record.project_owner.toLowerCase().indexOf(this.searchParams.project_owner) >= 0
         && record.budget.toString().indexOf(this.searchParams.budget) >= 0
-        && record.status.toLowerCase().indexOf(this.searchParams.status) >= 0) {
+        && record.status.toLowerCase().indexOf(this.searchParams.status) >= 0
+        && new Date(record.created) >= new Date(this.searchParams.createdStart)
+        && new Date(record.created) < new Date(this.searchParams.createdEnd)
+        && new Date(record.modified) >= new Date(this.searchParams.modifiedStart)
+        && new Date(record.modified) < new Date(this.searchParams.modifiedEnd)) {
         return record;
       }
+      return false;
     })
 
     this.setState({filteredRecords: filteredRecords}, function(){
-      console.log('this.state', this.state.filteredRecords);
+      // console.log('this.state', this.state.filteredRecords);
     });
 
   };
@@ -99,7 +121,9 @@ export default class RecordsComponent extends Component {
 
 
   render() {
-    let mappedRecords = this.state.filteredRecords.map((record, index) =>  
+    let mappedRecords;
+    if (this.state.filteredRecords.length >= 0) {
+      mappedRecords = this.state.filteredRecords.map((record, index) =>  
       <tr key={index}>
         <td> <a href="#">{record.title}</a></td>
         <td> {record.division} </td>
@@ -111,56 +135,38 @@ export default class RecordsComponent extends Component {
       </tr>
      )
     
+    } else {
+      mappedRecords = <tr><td>'No Records Available'</td></tr>
+    }
+    
     return (
-      <div>
-      <div><h1>Project Dashboard</h1></div>
+      <div className='table-container'>
+      <div className='title'><h1>Project Dashboard</h1></div>
       <table>
         <thead>
-          <tr>
-            <th>
-            Title
-            </th>
-            <th>
-              Division
-            </th>
-            <th>
-              Project Owner
-            </th>
-            <th>
-              Budget
-            </th>
-            <th>
-              Status
-            </th>
-            <th>
-              Created
-            </th>
-            <th>
-              Modified
-            </th>
-            </tr>
+        <TableHeaderComponent />
             <tr>
-            <th>
-              <input onKeyDown={this.detectBackspace.bind(this, 'title')} onChange={this.filterRecords.bind(this, 'title')} type="text" placeholder="filter title"/>
-            </th>
-            <th>
-              <input onKeyDown={this.detectBackspace.bind(this, 'division')} onChange={this.filterRecords.bind(this, 'division')} type="text" placeholder="filter division"/>
-            </th>
-            <th>
-              <input onKeyDown={this.detectBackspace.bind(this, 'project_owner')} onChange={this.filterRecords.bind(this, 'project_owner')} type="text" placeholder="filter project owner"/>
-            </th>
-            <th>
-              <input onKeyDown={this.detectBackspace.bind(this, 'budget')} onChange={this.filterRecords.bind(this, 'budget')} type="text" placeholder="filter budget"/>
-            </th>
-            <th>
-              <input onKeyDown={this.detectBackspace.bind(this, 'status')} onChange={this.filterRecords.bind(this, 'status')} type="text" placeholder="filter status"/>
-            </th> 
-            <th>
-              <input type="date" onChange={this.filterRecords.bind(this, 'created')} placeholder="start date"/> to <input type="date" placeholder="end date"/>
-            </th>
-            <th>
-              <input type="date" onChange={this.filterRecords.bind(this, 'modified')} placeholder="start date"/> to <input type="date" placeholder="end date"/>
-            </th>
+              <th>
+                <input onKeyDown={this.detectBackspace.bind(this, 'title')} onChange={this.filterRecords.bind(this, 'title')} type="text" placeholder="filter title"/>
+              </th>
+              <th>
+                <input onKeyDown={this.detectBackspace.bind(this, 'division')} onChange={this.filterRecords.bind(this, 'division')} type="text" placeholder="filter division"/>
+              </th>
+              <th>
+                <input onKeyDown={this.detectBackspace.bind(this, 'project_owner')} onChange={this.filterRecords.bind(this, 'project_owner')} type="text" placeholder="filter project owner"/>
+              </th>
+              <th>
+                <input onKeyDown={this.detectBackspace.bind(this, 'budget')} onChange={this.filterRecords.bind(this, 'budget')} type="text" placeholder="filter budget"/>
+              </th>
+              <th>
+                <input onKeyDown={this.detectBackspace.bind(this, 'status')} onChange={this.filterRecords.bind(this, 'status')} type="text" placeholder="filter status"/>
+              </th> 
+              <th>
+                <input type="date" onChange={this.filterRecords.bind(this, 'created_start')} placeholder="start date"/> to <input type="date" onChange={this.filterRecords.bind(this, 'created_end')} placeholder="end date"/>
+              </th>
+              <th>
+                <input type="date" onChange={this.filterRecords.bind(this, 'modified_start')} placeholder="start date"/> to <input type="date" onChange={this.filterRecords.bind(this, 'modified_end')} placeholder="end date"/>
+              </th>
             </tr>
           </thead>
           <tbody>

@@ -1,0 +1,15 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.table-container {
+  margin: 0 50px;
+}
+
+tr:nth-of-type(even) {
+  background-color: #eeeeee;
+}
+
+td {
+  padding: 8px 0px;
+}

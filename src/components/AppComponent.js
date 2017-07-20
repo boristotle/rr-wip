@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../styles/App.css';
 import RecordsComponent from './RecordsComponent';
 
-export default class App extends Component {
+export default class AppComponent extends Component {
   render() {
     return (
       <div>
