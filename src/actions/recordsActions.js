@@ -3,4 +3,4 @@ export function updateFilteredRecords(records) {
     type: 'UPDATE_FILTERED_RECORDS',
     payload: records
   }
-}
+} 
