@@ -99,6 +99,9 @@ export default class RecordsComponent extends Component {
 
 
   render() {
+
+    console.log('this.props', this.props);
+    
     let mappedRecords = this.state.filteredRecords.map((record, index) =>  
       <tr key={index}>
         <td> <a href="#">{record.title}</a></td>
