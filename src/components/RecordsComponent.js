@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as records from './mock-data.json';
 import ProjectOwnerComponent from './ProjectOwnerComponent';
 import BudgetComponent from './BudgetComponent';
 import StatusComponent from './StatusComponent';
@@ -18,8 +17,6 @@ export default class RecordsComponent extends Component {
     };
 
   };
-
-  
 
   _updateRecordProjectOwner(project_owner, id){
     let newStateRecords = [...this.props.records];
@@ -77,6 +74,7 @@ export default class RecordsComponent extends Component {
         && record.status.toLowerCase().indexOf(this.searchParams.status) >= 0) {
         return record;
       }
+      return false;
     })
 
    this.props.updateFilteredRecords(filteredRecords);

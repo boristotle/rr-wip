@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-// import RecordsComponent from './RecordsComponent';
-import RecordsContainer from './containers/RecordsContainer';
-// import {Route} from 'react-router-dom'
+import '../styles/App.css';
+import RecordsContainer from '../containers/RecordsContainer';
 
 export default class App extends Component {
   render() {

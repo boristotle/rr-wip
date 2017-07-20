@@ -1,4 +1,4 @@
-import RecordsComponent from '../RecordsComponent';
+import RecordsComponent from '../components/RecordsComponent';
 import {connect} from 'react-redux';
 import {updateFilteredRecords} from '../actions/RecordsActions';
 
