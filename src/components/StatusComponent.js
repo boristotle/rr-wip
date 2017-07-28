@@ -10,7 +10,7 @@ export default class StatusComponent extends Component {
   };
 
   enableStatusUpdate(){
-    this.setState({modifying_status: true})
+    this.setState({modifying_status: true});
   };
 
   updateStatus(event){

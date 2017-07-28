@@ -3,29 +3,13 @@ import React, { Component } from 'react';
 export default class TableHeaderComponent extends Component {
 
   render(){
+
+    let columnHeaders = ['Title', 'Division', 'Project Owner', 'Budget', 'Status', 'Created', 'Modified'];
+
+    let mappedHeaders = columnHeaders.map( (header, index) => { return <th key={index}>{header}</th>})
     return(
       <tr>
-        <th>
-        Title
-        </th>
-        <th>
-          Division
-        </th>
-        <th>
-          Project Owner
-        </th>
-        <th>
-          Budget
-        </th>
-        <th>
-          Status
-        </th>
-        <th>
-          Created
-        </th>
-        <th>
-          Modified
-        </th>
+       {mappedHeaders}
       </tr>
     )
   }

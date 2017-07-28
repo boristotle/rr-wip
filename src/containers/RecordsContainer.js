@@ -8,9 +8,13 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch) {
   return {
-    updateFilteredRecords: function(records) {
-      dispatch(updateFilteredRecords(records))
-    }
+    updateFilteredRecords: function(filteredRecords) {
+      dispatch(updateFilteredRecords(filteredRecords))
+    },
+    // updateModifyingInput: function(isModifying) {
+    //   dispatch(updateModifyingInput(isModifying))
+    // }
+
   }
 }
 
