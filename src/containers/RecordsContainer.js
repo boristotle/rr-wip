@@ -10,11 +10,7 @@ const mapDispatchToProps = function(dispatch) {
   return {
     updateFilteredRecords: function(filteredRecords) {
       dispatch(updateFilteredRecords(filteredRecords))
-    },
-    // updateModifyingInput: function(isModifying) {
-    //   dispatch(updateModifyingInput(isModifying))
-    // }
-
+    }
   }
 }
 

@@ -10,7 +10,10 @@ export default class ProjectOwnerComponent extends Component {
   };
 
   enableProjectOwnerUpdate(){
-    this.setState({modifying_project_owner: true})
+    if (!this.props.isModifying) {
+      this.setState({modifying_project_owner: true});
+      this.props.updateModifyingInput(!this.props.isModifying);
+    }
   };
 
   updateProjectOwner(event){
@@ -18,6 +21,7 @@ export default class ProjectOwnerComponent extends Component {
     let project_owner = this.project_owner.value;
     this.props.updateRecordProjectOwner(this.project_owner.value, this.props.id);
     this.setState({modifying_project_owner: false}, function(){
+      this.props.updateModifyingInput(!this.props.isModifying);
       alert(`Project owner updated to ${project_owner}`);
     });
   };

@@ -5,10 +5,10 @@ export function updateFilteredRecords(filteredRecords) {
   }
 } 
 
-// export function updateModifyingInput(isModifying) {
-//   return {
-//     type: 'UPDATE_MODIFYING_INPUT',
-//     payload: isModifying
-//   }
-// } 
+export function updateModifyingInput(isModifying) {
+  return {
+    type: 'UPDATE_MODIFYING_INPUT',
+    payload: isModifying
+  }
+} 
 

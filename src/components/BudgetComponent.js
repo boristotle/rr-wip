@@ -14,7 +14,10 @@ export default class BudgetComponent extends Component {
   };
 
   enableBudgetUpdate(){
-    this.setState({modifying_budget: true});
+    if (!this.props.isModifying) {
+      this.setState({modifying_budget: true});
+      this.props.updateModifyingInput(!this.props.isModifying);
+    }
   };
 
   updateBudget(event){
@@ -22,6 +25,7 @@ export default class BudgetComponent extends Component {
     let budget = this.budget.value;
     this.props.updateRecordBudget(this.budget.value, this.props.id);
     this.setState({modifying_budget: false}, function(){
+      this.props.updateModifyingInput(!this.props.isModifying);
         alert(`Budget updated to $${budget}`);
     });
   };

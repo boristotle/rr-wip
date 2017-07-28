@@ -10,7 +10,10 @@ export default class StatusComponent extends Component {
   };
 
   enableStatusUpdate(){
-    this.setState({modifying_status: true});
+    if (!this.props.isModifying) {
+      this.setState({modifying_status: true});
+      this.props.updateModifyingInput(!this.props.isModifying);
+    }
   };
 
   updateStatus(event){
@@ -18,6 +21,7 @@ export default class StatusComponent extends Component {
     let status = this.status.value;
     this.props.updateRecordStatus(this.status.value, this.props.id);
     this.setState({modifying_status: false}, function(){
+      this.props.updateModifyingInput(!this.props.isModifying);
       alert(`Status updated to ${status}`);
     });
   };
