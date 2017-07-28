@@ -10,18 +10,18 @@ export default class StatusComponent extends Component {
   };
 
   enableStatusUpdate(){
-    if (!this.props.isModifying) {
-      this.setState({modifying_status: true});
-      this.props.updateModifyingInput(!this.props.isModifying);
-    }
+    this.setState({modifying_status: true});
   };
+
+  updateState(){
+    this.setState({modifying_status: false})
+  }
 
   updateStatus(event){
     event.preventDefault();
     let status = this.status.value;
     this.props.updateRecordStatus(this.status.value, this.props.id);
     this.setState({modifying_status: false}, function(){
-      this.props.updateModifyingInput(!this.props.isModifying);
       alert(`Status updated to ${status}`);
     });
   };
@@ -31,7 +31,7 @@ export default class StatusComponent extends Component {
     if (this.state.modifying_status) {
       return <td>
         <form onSubmit={this.updateStatus.bind(this)}>
-          <input autoFocus ref={(input) => this.status = input} type='text' defaultValue={this.props.record}/>
+          <input onBlur={this.updateState.bind(this)} autoFocus ref={(input) => this.status = input} type='text' defaultValue={this.props.record}/>
         </form>
       </td> 
     } else {

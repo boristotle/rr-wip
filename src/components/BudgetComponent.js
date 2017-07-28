@@ -14,18 +14,18 @@ export default class BudgetComponent extends Component {
   };
 
   enableBudgetUpdate(){
-    if (!this.props.isModifying) {
-      this.setState({modifying_budget: true});
-      this.props.updateModifyingInput(!this.props.isModifying);
-    }
+    this.setState({modifying_budget: true});
   };
+
+  updateState(){
+    this.setState({modifying_budget: false})
+  }
 
   updateBudget(event){
     event.preventDefault();
     let budget = this.budget.value;
     this.props.updateRecordBudget(this.budget.value, this.props.id);
     this.setState({modifying_budget: false}, function(){
-      this.props.updateModifyingInput(!this.props.isModifying);
         alert(`Budget updated to $${budget}`);
     });
   };
@@ -34,7 +34,7 @@ export default class BudgetComponent extends Component {
       if (this.state.modifying_budget) {
         return <td>
           <form onSubmit={this.updateBudget.bind(this)}>
-            <input autoFocus ref={(input) => this.budget = input} type='text' defaultValue={this.props.record}/>
+            <input onBlur={this.updateState.bind(this)} autoFocus ref={(input) => this.budget = input} type='text' defaultValue={this.props.record}/>
           </form>
         </td> 
       } else {

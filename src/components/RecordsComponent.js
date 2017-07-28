@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import TableHeaderComponent from './TableHeaderComponent';
 import InputFilterComponent from './InputFilterComponent';
-import StatusContainer from '../containers/StatusContainer';
-import BudgetContainer from '../containers/BudgetContainer';
-import ProjectOwnerContainer from '../containers/ProjectOwnerContainer';
+import StatusComponent from './StatusComponent';
+import BudgetComponent from './BudgetComponent';
+import ProjectOwnerComponent from './ProjectOwnerComponent';
 
 export default class RecordsComponent extends Component {
 
@@ -77,9 +77,9 @@ export default class RecordsComponent extends Component {
       <tr key={index}>
         <td> <a href="#">{record.title}</a></td>
         <td> {record.division} </td>
-        <ProjectOwnerContainer id={index} updateRecordProjectOwner={this._updateRecordProjectOwner.bind(this)} record={record.project_owner} />
-        <BudgetContainer id={index} updateRecordBudget={this._updateRecordBudget.bind(this)} record={record.budget} />
-        <StatusContainer id={index} updateRecordStatus={this._updateRecordStatus.bind(this)} record={record.status} />
+        <ProjectOwnerComponent id={index} updateRecordProjectOwner={this._updateRecordProjectOwner.bind(this)} record={record.project_owner} />
+        <BudgetComponent id={index} updateRecordBudget={this._updateRecordBudget.bind(this)} record={record.budget} />
+        <StatusComponent id={index} updateRecordStatus={this._updateRecordStatus.bind(this)} record={record.status} />
         <td> {record.created} </td> 
         <td> {record.modified} </td>
       </tr>

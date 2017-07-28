@@ -10,18 +10,18 @@ export default class ProjectOwnerComponent extends Component {
   };
 
   enableProjectOwnerUpdate(){
-    if (!this.props.isModifying) {
-      this.setState({modifying_project_owner: true});
-      this.props.updateModifyingInput(!this.props.isModifying);
-    }
+    this.setState({modifying_project_owner: true});
   };
+
+  updateState(){
+    this.setState({modifying_project_owner: false})
+  }
 
   updateProjectOwner(event){
     event.preventDefault();
     let project_owner = this.project_owner.value;
     this.props.updateRecordProjectOwner(this.project_owner.value, this.props.id);
     this.setState({modifying_project_owner: false}, function(){
-      this.props.updateModifyingInput(!this.props.isModifying);
       alert(`Project owner updated to ${project_owner}`);
     });
   };
@@ -30,7 +30,7 @@ export default class ProjectOwnerComponent extends Component {
     if (this.state.modifying_project_owner) {
       return <td>
         <form onSubmit={this.updateProjectOwner.bind(this)}>
-          <input autoFocus ref={(input) => this.project_owner = input} type='text' defaultValue={this.props.record}/>
+          <input onBlur={this.updateState.bind(this)} autoFocus ref={(input) => this.project_owner = input} type='text' defaultValue={this.props.record}/>
         </form>
       </td>
     } else {
